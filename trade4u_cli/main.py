@@ -4,10 +4,13 @@ import requests
 from rich.console import Console
 from datetime import datetime
 from trade4u_cli.nlp import parse_command
+from trade4u_cli.local_llm import ask_ai, is_ai_available, llm
 
 console = Console()
 
-GREETING = """🤖 Hi! I'm Trade4U, your market assistant. Ask me anything about stocks, markets, or your portfolio!
+AI_STATUS = " (with AI 🤖)" if is_ai_available() else ""
+
+GREETING = f"""🤖 Hi! I'm Trade4U, your market assistant. Ask me anything about stocks, markets, or your portfolio{AI_STATUS}!
 
 I can help with:
 • Stock prices & quotes
@@ -17,6 +20,7 @@ I can help with:
 • Market news
 • Sector performance
 • Crypto prices
+• AI-powered analysis (when available)
 
 Just ask naturally!"""
 
@@ -415,6 +419,17 @@ Just ask naturally!"""
                 return self.handle_price(entities["symbol"])
             if "market" in user_input.lower():
                 return self.handle_price("^GSPC")
+            if is_ai_available():
+                ai_response = ask_ai(user_input)
+                if ai_response:
+                    return ai_response
+        
+        if intent == "AI":
+            if is_ai_available():
+                ai_response = ask_ai(user_input)
+                if ai_response:
+                    return ai_response
+            return "AI is not available. Install Ollama to enable AI features."
         
         return "I'm not sure what you're asking about. Try 'help' for options."
 

@@ -55,7 +55,7 @@ INTENTS = {
         "patterns": [r"(?:what\s+can\s+(?:you|i)|how\s+does)\s+(?:you|i)\s+(?:do|work|know)"],
     },
     "GREETING": {
-        "keywords": ["hi", "hello", "hey", "howdy", "good morning", "good afternoon", "good evening", "greetings", "hi there", "yo", "wassup", "whats up", "sup", "hiya", "hallo", "heya"],
+        "keywords": ["hi", "hello", "hey", "howdy", "good morning", "good afternoon", "good evening", "greetings", "hi there", "yo", "wassup", "whats up", "sup", "hiya", "hallo", "heya", "ai", "chat", "talk", "ask"],
         "patterns": [],
         "min_score": 2,
     },
@@ -119,6 +119,10 @@ INTENTS = {
     "RECOMMEND": {
         "keywords": ["recommend", "suggest", "buy", "sell", "what to buy", "what to invest", "which stock", "best stock", "good stock", "pick", "investment idea", "hot stock", "momentum", "short term", "long term", "intraday", "today", "what stocks", "list stocks", "show stocks", "available stocks", "stocks to buy", "stocks to watch"],
         "patterns": [r"(?:which|what|give me|recommend|suggest)\s+.*(?:buy|pick|stock|invest)", r"best\s+(?:stock|pick|buy)", r"(?:hot|top|momentum)\s+stock", r"what\s+to\s+buy", r"investment\s+idea", r"(?:short|long|intraday)\s*term", r"(?:what|show|list)\s+stocks?\s+(?:can|to|available)", r"available\s+stocks"],
+    },
+    "AI": {
+        "keywords": ["think", "analyze", "opinion", "view", "your thoughts", "what do you think", "explain", "why", "reason", "should i", "is it good", "worth it", "advice", "insight", "perspective"],
+        "patterns": [r"what\s+(do\s+you\s+think|do\s+you\s+say|about|your\s+opinion)", r"your\s+(thoughts?|opinion|view|advice)", r"(should|could)\s+you\s+(explain|analyze|tell)", r"why\s+(do\s+you|is|are|should)", r"(?:give\s+me\s+)?(?:your\s+)?(?:opinion|thoughts?|advice|insight)"],
     },
 }
 
