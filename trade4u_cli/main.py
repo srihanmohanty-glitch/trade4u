@@ -260,11 +260,15 @@ class Trade4UChat:
     def __init__(self):
         self.portfolio = load_portfolio()
         self.alerts = load_alerts()
-
+        self.settings = load_settings()
+    
     def respond(self, user_input):
         parsed = parse_command(user_input)
         intent = parsed["intent"]
         entities = parsed["entities"]
+        
+        exchange = self.settings.get("exchange", "NSE")
+        stock_list = self.settings.get("stock_list", "default")
         
         if intent == "GREETING":
             return "Hey! 👋 What can I help you with today?"
@@ -285,6 +289,7 @@ class Trade4UChat:
 • Alerts: "Alert me when TSLA hits $500"
 • News: "Any market news?"
 • Charts: "Chart for NVDA"
+• AI analysis: "What do you think about NVDA?"
 
 Just ask naturally!"""
         
@@ -420,13 +425,13 @@ Just ask naturally!"""
             if "market" in user_input.lower():
                 return self.handle_price("^GSPC")
             if is_ai_available():
-                ai_response = ask_ai(user_input)
+                ai_response = ask_ai(user_input, exchange, stock_list)
                 if ai_response:
                     return ai_response
         
         if intent == "AI":
             if is_ai_available():
-                ai_response = ask_ai(user_input)
+                ai_response = ask_ai(user_input, exchange, stock_list)
                 if ai_response:
                     return ai_response
             return "AI is not available. Install Ollama to enable AI features."
