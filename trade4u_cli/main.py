@@ -54,6 +54,12 @@ STOCK_SYMBOLS = {
     "V": "Visa", "MA": "Mastercard", "JNJ": "Johnson & Johnson", "UNH": "UnitedHealth",
     "XOM": "Exxon", "CVX": "Chevron", "PFE": "Pfizer", "ABBV": "AbbVie",
     "KO": "Coca-Cola", "PEP": "Pepsi", "MCD": "McDonald's", "NKE": "Nike",
+    "QCOM": "Qualcomm", "AVGO": "Broadcom", "BRK.B": "Berkshire Hathaway",
+    "GS": "Goldman Sachs", "MS": "Morgan Stanley", "C": "Citigroup",
+    "AXP": "American Express", "BLK": "BlackRock", "COF": "Capital One",
+    "USB": "US Bancorp", "WFC": "Wells Fargo", "SNAP": "Snap", "PINS": "Pinterest",
+    "TWLO": "Twilio", "PLTR": "Palantir", "ROKU": "Roku", "ZM": "Zoom",
+    "DOCU": "DocuSign",
 }
 
 COMPANY_NAMES = {

@@ -318,11 +318,17 @@ def extract_entities(text):
         "ABBVie": "ABBV", "COCA COLA": "KO", "PEPSI": "PEP", "MCDONALD'S": "MCD",
         "AMD": "AMD", "INTERNATIONAL BUSINESS MACHINES": "IBM", "IBM": "IBM",
         "SPOTIFY TECHNOLOGY": "SPOT", "MARGIN": "PYPL", "SNAP": "SNAP",
-        "TWITTER": "X", "X": "X", "BERKSHIRE": "BRK.A", "BRK": "BRK.A",
+        "TWITTER": "X", "X": "X", "BERKSHIRE": "BRK.B", "BRK": "BRK.B",
         "RELIANCE": "RELIANCE", "TCS": "TCS", "INFOSYS": "INFY", "INFY": "INFY",
         "HDFC": "HDFCBANK", "SBIN": "SBIN", "BHARTI": "BHARTIARTL", "ICICI": "ICICIBANK",
         "ADANI": "ADANIENT", "WIPRO": "WIPRO", "HCL": "HCLTECH", "MARUTI": "MARUTI",
         "TATA": "TATAMOTORS", "KOTAK": "KOTAKBANK", "AXIS": "AXISBANK",
+        "QUALCOMM": "QCOM", "BROADCOM": "AVGO", "AVGO": "AVGO",
+        "GOLDMAN": "GS", "GS": "GS", "MORGAN STANLEY": "MS", "MS": "MS",
+        "CITI": "C", "CITIGROUP": "C", "AMERICAN EXPRESS": "AXP", "AXP": "AXP",
+        "BLACKROCK": "BLK", "CAPITAL ONE": "COF", "USB": "USB", "WELLS FARGO": "WFC",
+        "SNAPCHAT": "SNAP", "PINTEREST": "PINS", "TWILIO": "TWLO",
+        "PALANTIR": "PLTR", "ROKU": "ROKU", "ZOOM": "ZM", "DOCUSIGN": "DOCU",
     }
     
     for name, sym in company_map.items():
@@ -350,6 +356,8 @@ def extract_entities(text):
         "TGT", "COST", "V", "MA", "JNJ", "UNH", "XOM", "CVX", "PFE", "ABBV",
         "KO", "PEP", "MCD", "NKE", "SNAP", "X", "SQ", "ROKU", "ZM", "DOCU",
         "TWLO", "SNOW", "CRWD", "NET", "DDOG", "PLTR", "SOFI", "RIVN", "LCID",
+        "QCOM", "AVGO", "BRK.B", "GS", "MS", "C", "AXP", "BLK", "COF", "USB", "WFC",
+        "PINS", "RELIANCE", "TCS", "INFY", "HDFCBANK", "SBIN", "BHARTIARTL", "ICICIBANK",
     ]
     
     words = text_clean.split()
@@ -375,6 +383,10 @@ COMPANY_NAMES = {
     "NVIDIA": "NVDA", "NETFLIX": "NFLX", "INTEL": "INTC", "DISNEY": "DIS",
     "ADOBE": "ADBE", "PAYPAL": "PYPL", "SALESFORCE": "CRM", "ORACLE": "ORCL",
     "WALMART": "WMT", "NIKE": "NKE", "COKE": "KO", "MCDONALD": "MCD",
+    "UBER": "UBER", "SNAP": "SNAP", "PINTEREST": "PINS", "TWILIO": "TWLO",
+    "PALANTIR": "PLTR", "ROKU": "ROKU", "ZOOM": "ZM", "DOCUSIGN": "DOCU",
+    "QUALCOMM": "QCOM", "BROADCOM": "AVGO", "RELIANCE": "RELIANCE",
+    "TCS": "TCS", "INFOSYS": "INFY", "HDFC": "HDFCBANK", "SBIN": "SBIN",
 }
 
 STOCK_SYMBOLS = {
@@ -388,6 +400,12 @@ STOCK_SYMBOLS = {
     "V": "Visa", "MA": "Mastercard", "JNJ": "Johnson & Johnson", "UNH": "UnitedHealth",
     "XOM": "Exxon", "CVX": "Chevron", "PFE": "Pfizer", "ABBV": "AbbVie",
     "KO": "Coca-Cola", "PEP": "Pepsi", "MCD": "McDonald's", "NKE": "Nike",
+    "QCOM": "Qualcomm", "AVGO": "Broadcom", "BRK.B": "Berkshire Hathaway",
+    "GS": "Goldman Sachs", "MS": "Morgan Stanley", "C": "Citigroup",
+    "AXP": "American Express", "BLK": "BlackRock", "COF": "Capital One",
+    "USB": "US Bancorp", "WFC": "Wells Fargo", "SNAP": "Snap", "PINS": "Pinterest",
+    "TWLO": "Twilio", "PLTR": "Palantir", "ROKU": "Roku", "ZM": "Zoom",
+    "DOCU": "DocuSign",
 }
 
 CRYPTO_SYMBOLS = {
@@ -414,6 +432,8 @@ STOP_WORDS = {
     "MA", "PA", "SO", "DO", "NO", "IF", "IS", "IT", "IN", "ON", "AT",
     "AN", "AS", "WE", "US", "BE", "BY", "TO", "MY", "GO", "UP", "AM",
     "GET", "SET", "LET", "SAY", "SAID", "ONE", "TWO", "NEW", "OLD",
+    "QCOM", "AVGO", "GS", "MS", "C", "AXP", "BLK", "COF", "USB", "WFC",
+    "PINS", "RELIANCE", "TCS", "INFY", "HDFCBANK", "SBIN", "BHARTIARTL", "ICICIBANK",
 }
 
 
