@@ -1,0 +1,17 @@
+README.md
+pyproject.toml
+trade4u.egg-info/PKG-INFO
+trade4u.egg-info/SOURCES.txt
+trade4u.egg-info/dependency_links.txt
+trade4u.egg-info/entry_points.txt
+trade4u.egg-info/requires.txt
+trade4u.egg-info/top_level.txt
+trade4u_cli/__init__.py
+trade4u_cli/main.py
+trade4u_cli/nlp.py
+trade4u_cli/commands/__init__.py
+trade4u_cli/commands/alerts.py
+trade4u_cli/commands/news.py
+trade4u_cli/commands/portfolio.py
+trade4u_cli/commands/price.py
+trade4u_cli/utils/__init__.py

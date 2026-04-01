@@ -1,0 +1,2 @@
+[console_scripts]
+trade4u = trade4u_cli.main:cli

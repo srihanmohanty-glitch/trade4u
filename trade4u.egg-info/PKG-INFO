@@ -1,0 +1,122 @@
+Metadata-Version: 2.4
+Name: trade4u
+Version: 0.3.0
+Summary: A CLI agent for stock trading and market analysis
+Author-email: Trade4U Team <team@trade4u.dev>
+License: MIT
+Keywords: cli,stocks,trading,market,finance,nse,nyse
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Financial and Insurance Industry
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Office/Business :: Financial
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: click>=8.1.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: rich>=13.7.0
+Requires-Dist: tabulate>=0.9.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+Requires-Dist: black>=24.0.0; extra == "dev"
+Requires-Dist: ruff>=0.2.0; extra == "dev"
+
+# Trade4U - Your AI Trading Assistant
+
+A smart CLI chatbot for stock trading, portfolio management, and market analysis.
+
+## Installation
+
+```bash
+pip install trade4u
+```
+
+## Usage
+
+```bash
+trade4u
+```
+
+Or run in chat mode:
+
+```bash
+python -m trade4u_cli.main
+```
+
+## Chat Commands
+
+Just type naturally! Examples:
+
+| You Say | What Trade4U Does |
+|---------|------------------|
+| `What's Apple's stock price?` | Gets AAPL quote |
+| `lookup AAPL` | Gets AAPL quote |
+| `my portfolio` | Shows holdings & P&L |
+| `add TSLA 10 250` | Adds TSLA to portfolio |
+| `alert AAPL 300` | Sets price alert |
+| `news` | Top market news |
+| `chart NVDA` | ASCII chart |
+| `which stock to buy` | Stock recommendations |
+| `-settings` | Configure exchange, stock lists, etc. |
+| `help` | Show all commands |
+| `exit` | Quit |
+
+## Features
+
+- **Natural Language** - Talk like a human, not a robot
+- **Multi-Exchange** - Support for NSE (India), NYSE (US)
+- **Stock Lists** - default, nifty50, tech, finance, midcap
+- **Portfolio Tracking** - Track holdings, P&L, cash
+- **Price Alerts** - Get notified of price targets
+- **Stock Recommendations** - Buy/sell suggestions
+- **Market News** - Latest headlines and updates
+- **Stock Charts** - ASCII price charts
+- **Settings** - Customize exchange, currency, timezone
+
+## Settings
+
+Run `-settings` to configure:
+- **Exchange**: NSE, NYSE, NASDAQ
+- **Stock List**: default, nifty50, tech, finance, midcap
+- **Timezone**: Asia/Kolkata, America/New_York, etc.
+- **Currency**: INR, USD, EUR
+
+## Data Storage
+
+Your data is saved in `~/.trade4u/`:
+- `portfolio.json` - Your holdings
+- `alerts.json` - Price alerts
+- `settings.json` - Your settings
+
+## Examples
+
+```
+You: what's Tesla at?
+Trade4U: 📈 TSLA - Tesla, Inc.
+         Price: $371.75
+         Change: +16.47 (+4.64%)
+
+You: show my portfolio
+Trade4U: 💼 Your Portfolio
+         - AAPL: 10 shares @ $200 → $253.79
+           🟢 +$537.90 (+26.90%)
+
+You: -settings
+⚙️ Current Settings:
+  📌 Exchange: NSE
+  📋 Stock List: nifty50
+  🌐 Timezone: Asia/Kolkata
+  💰 Currency: INR
+  📊 Display: compact
+  🔔 Alerts: Enabled
+```
+
+## Requirements
+
+- Python 3.10+
+- rich (for beautiful terminal output)
