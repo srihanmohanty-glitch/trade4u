@@ -2,6 +2,8 @@ import click
 import re
 import requests
 from rich.console import Console
+from rich.panel import Panel
+from rich.text import Text
 from datetime import datetime
 from trade4u_cli.nlp import parse_command
 from trade4u_cli.local_llm import ask_ai, is_ai_available, llm
@@ -9,21 +11,44 @@ from trade4u_cli.data.stocks import ALL_STOCKS, STOCK_LISTS, get_yahoo_symbol, S
 
 console = Console()
 
-AI_STATUS = " (with AI 🤖)" if is_ai_available() else ""
+BANNER = """
+[bold cyan]
+    ,----,                                                                
+      ,/   .`|                                             ,--,               
+    ,`   .'  :                                           ,--.'|               
+  ;    ;     /                       ,---,            ,--,  | :         ,--,  
+.'___,/    ,' __  ,-.              ,---.'|         ,---.'|  : '       ,'_ /|  
+|    :     |,' ,'/ /|              |   | :         ;   : |  | ;  .--. |  | :  
+;    |.';  ;'  | |' | ,--.--.      |   | |   ,---. |   | : _' |,'_ /| :  . |  
+`----'  |  ||  |   ,'/       \\   ,--.__| |  /     \\:   : |.'  ||  ' | |  . .  
+    '   :  ;'  :  / .--.  .-. | /   ,'   | /    /  |   ' '  ; :|  | ' |  | |  
+    |   |  '|  | '   \\__\\/: . ..   '  /  |.    ' / \\   \\  .'. |:  | | :  ' ;  
+    '   :  |;  : |   ,\" .--.; |'   ; |:  |'   ;   /|`---`:  | '|  ; ' |  | '  
+    ;   |.' |  , ;  /  /  ,.  ||   | '/  ''   |  / |     '  ; |:  | : ;  ; |  
+    '---'    ---'  ;  :   .'   \\   :    :||   :    |     |  : ;'  :  `--'   \\ 
+                   |  ,     .-./\\   \\  /   \\   \\  /      '  ,/ :  ,      .-./ 
+                    `--`---'     `----'     `----'       '--'   `--`----' 
+[/bold cyan]"""
 
-GREETING = f"""🤖 Hi! I'm Trade4U, your market assistant. Ask me anything about stocks, markets, or your portfolio{AI_STATUS}!
 
-I can help with:
-• Stock prices & quotes
-• Market indices (S&P 500, NASDAQ, Dow)
-• Your portfolio & P&L
-• Price alerts
-• Market news
-• Sector performance
-• Crypto prices
-• AI-powered analysis (when available)
+def show_greeting():
+    console.clear()
+    console.print(BANNER)
+    ai_status = " [bold green]🤖 AI Enabled[/bold green]" if is_ai_available() else ""
+    console.print(
+        f"\n[bold green]Hi I'm Trade4U![/bold green]{ai_status} [bold]How may I help you today?[/bold]\n"
+    )
 
-Just ask naturally!"""
+    console.print("[dim]Commands:[/dim]")
+    console.print("  [cyan]prices[/cyan] <symbol>   - Get stock/crypto price")
+    console.print("  [cyan]portfolio[/cyan]        - View your portfolio")
+    console.print("  [cyan]alerts[/cyan]           - Manage price alerts")
+    console.print("  [cyan]news[/cyan]             - Latest market news")
+    console.print("  [cyan]indices[/cyan]          - Market indices")
+    console.print("  [cyan]-settings[/cyan]         - Configure settings")
+    console.print("  [cyan]help[/cyan]             - See all commands")
+    console.print("  [cyan]exit[/cyan]             - Quit\n")
+
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
@@ -951,11 +976,13 @@ Prev Close: {curr_symbol}{quote["prev_close"]:,.2f}
 
 def run_chat():
     chat = Trade4UChat()
-    console.print(f"\n[bold cyan]Trade4U:[/bold cyan] {GREETING}\n")
+    show_greeting()
 
     while True:
         try:
-            user_input = console.input("[bold green]You:[/bold green] ")
+            user_input = console.input(
+                "\n[bold green]│[/bold green] [white]User input here.[/white] [dim]│[/dim]\n[bold green]└─>[/bold green] "
+            )
             if not user_input.strip():
                 continue
 
@@ -1037,7 +1064,14 @@ def run_chat():
 
             console.print()
             response = chat.respond(user_input)
-            console.print(f"[bold cyan]Trade4U:[/bold cyan] {response}\n")
+            console.print(
+                Panel(
+                    response,
+                    title="[bold cyan]Trade4U[/bold cyan]",
+                    border_style="cyan",
+                    padding=(1, 2),
+                )
+            )
 
         except KeyboardInterrupt:
             console.print("\n\n[bold cyan]Trade4U:[/bold cyan] Bye! Happy trading! 📈\n")
