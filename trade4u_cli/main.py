@@ -971,13 +971,18 @@ Prev Close: {curr_symbol}{quote["prev_close"]:,.2f}
 
     def handle_chart(self, symbol):
         try:
+            yahoo_sym = get_yahoo_symbol(symbol.upper())
             response = requests.get(
-                f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}",
+                f"https://query1.finance.yahoo.com/v8/finance/chart/{yahoo_sym}",
                 params={"interval": "5m", "range": "1d"},
                 headers=HEADERS,
                 timeout=10,
             )
-            closes = response.json()["chart"]["result"][0]["indicators"]["quote"][0]["close"][-20:]
+            data = response.json()
+            if "chart" not in data or "result" not in data["chart"] or not data["chart"]["result"]:
+                return f"Couldn't find data for {symbol}. Try a valid symbol like AAPL, NVDA, or RELIANCE."
+
+            closes = data["chart"]["result"][0]["indicators"]["quote"][0]["close"][-20:]
             closes = [c for c in closes if c]
 
             if not closes:
@@ -989,13 +994,13 @@ Prev Close: {curr_symbol}{quote["prev_close"]:,.2f}
             quote = get_quote(symbol)
             name = quote["name"] if quote else symbol
 
-            result = f"📈 **{name} ({symbol})** - Today\n\n"
+            result = f"📈 **{name} ({symbol.upper()})** - Today\n\n"
             for close in closes:
                 bar_len = max(2, int((close - min_p) * scale) + 1)
                 result += f"│{'█' * bar_len} ${close:.2f}\n"
             return result
-        except:
-            return f"Couldn't load chart for {symbol}."
+        except Exception as e:
+            return f"Couldn't load chart for {symbol}. Try a valid symbol like AAPL, NVDA, or RELIANCE."
 
 
 def run_chat():
