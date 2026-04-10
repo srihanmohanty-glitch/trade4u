@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade4U - AI Trading Assistant</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .tagline { font-size: 1.3rem; color: #aaa; margin-bottom: 20px; }
+        
+        .hero {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        .terminal {
+            background: #1a1a2e;
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            color: #00ff88;
+            overflow-x: auto;
+            white-space: pre;
+            border: 1px solid #333;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .feature {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+        .feature:hover { transform: translateY(-5px); }
+        .feature-icon { font-size: 2rem; margin-bottom: 10px; }
+        .feature h3 { margin-bottom: 10px; color: #00d4ff; }
+        .feature p { color: #ccc; font-size: 0.9rem; }
+        
+        .download-section {
+            text-align: center;
+            background: linear-gradient(135deg, #7b2ff7, #00d4ff);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        .download-section h2 { font-size: 2rem; margin-bottom: 15px; }
+        .download-section p { margin-bottom: 25px; opacity: 0.9; }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #fff;
+            color: #7b2ff7;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 10px;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,212,255,0.3);
+        }
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+        }
+        
+        .install-commands {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        .install-commands h3 { color: #00d4ff; margin-bottom: 15px; }
+        .install-commands code {
+            display: block;
+            background: #1a1a2e;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border-radius: 8px;
+            color: #00ff88;
+        }
+        
+        footer {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .container { padding: 20px; }
+            .terminal { font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Trade4U</h1>
+            <p class="tagline">Your AI-Powered Trading Assistant</p>
+            <p>Natural language CLI for stock prices, portfolio tracking, market analysis & more</p>
+        </header>
+        
+        <div class="hero">
+            <div class="terminal">
+,----,                                                                
+  ,/   .`|                                             ,--,               
+,`   .'  :                                           ,--.'|               
+;    ;     /                       ,---,            ,--,  | :         ,--,  
+.'___,/    ,' __  ,-.              ,---.'|         ,---.'|  : '       ,'_ /|  
+|    :     |,' ,'/ /|              |   | :         ;   : |  | ;  .--. |  | :  
+;    |.';  ;'  | |' | ,--.--.      |   | |   ,---. |   : : _' |,'_ /| :  . |  
+`----'  |  ||  |   ,'/       \   ,--.__| |  /     \:   : |.'  ||  ' | |  . .  
+    '   :  ;'  :  / .--.  .-. | /   ,'   | /    /  |   ' '  ; :|  | ' |  | |  
+    |   |  '|  | '   \__\/: . ..   '  /  |.    ' / \   \  .'. |:  | | :  ' ;  
+    '   :  |;  : |   ," .--.; |'   ; |:  |'   ;   /|`---`:  | '|  ; ' |  | '  
+    ;   |.' |  , ;  /  /  ,.  ||   | '/  ''   |  / |     '  ; |:  | : ;  ; |  
+    '---'    ---'  ;  :   .'   \   :    :||   :    |     |  : ;'  :  `--'   \ 
+                   |  ,     .-./\   \  /   \   \  /      '  ,/ :  ,      .-./ 
+                    `--`---'     `----'     `----'       '--'   `--`----' 
+
+Hi I'm Trade4U! How may I help you today?
+
+│ User input here. │
+└─> AAPL
+╭────────────────────────────────── Trade4U ───────────────────────────────────╮
+│  📈 Apple Inc. (AAPL)                                                        │
+│  Price: $261.24 (+0.29%)                                                    │
+│  52W Range: $288.62 - $186.06                                               │
+╰──────────────────────────────────────────────────────────────────────────────╯
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>Stock Prices</h3>
+                <p>Real-time prices for 500+ stocks across NYSE, NASDAQ & NSE</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💼</div>
+                <h3>Portfolio</h3>
+                <p>Track holdings, P&L, add/remove positions</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Assistant</h3>
+                <p>Local AI (Ollama) for analysis & recommendations</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📈</div>
+                <h3>Charts & Analytics</h3>
+                <p>ASCII charts, 52-week highs, volume data</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔔</div>
+                <h3>Price Alerts</h3>
+                <p>Get notified when stocks hit your target prices</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🌍</div>
+                <h3>Multi-Asset</h3>
+                <p>Crypto, Forex, Commodities, ETFs & Indices</p>
+            </div>
+        </div>
+        
+        <div class="download-section">
+            <h2>🚀 Get Started</h2>
+            <p>Download the executable or install via pip</p>
+            
+            <a href="https://github.com/srihanmohanty-glitch/trade4u/raw/main/dist/trade4u" class="btn">⬇️ Download for macOS</a>
+            <a href="https://github.com/srihanmohanty-glitch/trade4u" class="btn btn-secondary">View on GitHub</a>
+            
+            <div class="install-commands">
+                <h3>Or install via pip:</h3>
+                <code>pip install git+https://github.com/srihanmohanty-glitch/trade4u.git</code>
+                
+                <h3>Or clone and install:</h3>
+                <code>git clone https://github.com/srihanmohanty-glitch/trade4u.git</code>
+                <code>cd trade4u && pip install -e .</code>
+            </div>
+        </div>
+        
+        <div class="download-section" style="background: rgba(255,255,255,0.1);">
+            <h2>🤖 Enable AI Features</h2>
+            <p>For AI-powered analysis, install Ollama:</p>
+            
+            <div class="install-commands">
+                <h3>macOS:</h3>
+                <code>brew install ollama && ollama serve</code>
+                
+                <h3>Windows:</h3>
+                <code>Download from https://ollama.com</code>
+                
+                <h3>Then pull a model:</h3>
+                <code>ollama pull llama3.2</code>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Built with 💜 using Python • Data from Yahoo Finance</p>
+            <p><a href="https://github.com/srihanmohanty-glitch/trade4u" style="color: #00d4ff;">GitHub</a> • 
+               <a href="https://github.com/srihanmohanty-glitch/trade4u/releases" style="color: #00d4ff;">Releases</a></p>
+        </footer>
+    </div>
+</body>
+</html>
