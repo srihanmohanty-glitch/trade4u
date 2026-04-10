@@ -629,17 +629,41 @@ Just ask naturally!"""
                 return self.handle_price(entities["symbol"])
             if "market" in user_input.lower():
                 return self.handle_price("^GSPC")
+
             if is_ai_available():
                 ai_response = ask_ai(user_input, exchange, stock_list)
                 if ai_response:
                     return ai_response
+
+            return f"""I can help you with:
+• Stock prices: "What's AAPL?" or "NVDA price"
+• Portfolio: "Show my portfolio"
+• Market data: "Top gainers" or "market indices"
+• Crypto: "Bitcoin price"
+• Settings: "-settings"
+
+Or install Ollama to enable AI for any question!"""
 
         if intent == "AI":
             if is_ai_available():
                 ai_response = ask_ai(user_input, exchange, stock_list)
                 if ai_response:
                     return ai_response
-            return "AI is not available. Install Ollama to enable AI features."
+            return "AI not available. Install Ollama: brew install ollama && ollama serve"
+
+        if is_ai_available():
+            ai_response = ask_ai(user_input, exchange, stock_list)
+            if ai_response:
+                return ai_response
+
+        return f"""I can help you with:
+• Stock prices: "What's AAPL?" or "NVDA price"
+• Portfolio: "Show my portfolio"
+• Market data: "Top gainers" or "market indices"
+• Crypto: "Bitcoin price"
+• Settings: "-settings"
+
+Or install Ollama to enable AI for any question!"""
 
         return "I'm not sure what you're asking about. Try 'help' for options."
 
