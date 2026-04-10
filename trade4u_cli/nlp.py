@@ -197,8 +197,14 @@ INTENTS = {
             "when close",
             "nyse",
             "us market",
+            "market currently",
+            "current market",
+            "market status",
+            "trading session",
+            "is the market",
+            "are markets",
         ],
-        "patterns": [r"(?:is|are)\s+(?:the\s+)?market\s+(?:open|closed)"],
+        "patterns": [r"(?:is|are)\s+(?:the\s+)?market\s+(?:open|closed|currently)"],
     },
     "TOP_GAINERS": {
         "keywords": [
@@ -642,6 +648,9 @@ def classify_intent(text):
 
     if text_lower == "stock market":
         return "INDEX"
+
+    if re.search(r"\b(is|are)\s+(the\s+)?market\s+", text_lower):
+        return "MARKET_STATUS"
 
     if re.search(r"\b(thank|thx|thanks|appreciate|grateful|cheers)\b", text_lower):
         return "THANKS"
